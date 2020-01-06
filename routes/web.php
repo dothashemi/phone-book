@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('panel')->middleware('auth')->group(function () {
+
+    Route::resource('/contacts', 'ContactController');
+
+    Route::resource('/phones', 'ContactController');
+
+    Route::resource('/groups', 'ContactController');
+
+});

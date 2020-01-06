@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
@@ -26,5 +24,4 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/phones', 'ContactController');
 
     Route::resource('/groups', 'ContactController');
-
 });

@@ -15,7 +15,23 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('group_id')->nullable();
+            $table->string('name', 100);
+            $table->text('describe')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('group_id')
+                ->references('id')
+                ->on('groups')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

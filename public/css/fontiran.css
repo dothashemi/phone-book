@@ -1,0 +1,32 @@
+﻿@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url('/fonts/fontiran/eot/iranyekanbold.eot');
+    src: url('/fonts/fontiran/eot/iranyekanbold.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/fontiran/woff2/iranyekanbold.woff2') format('woff2'),
+         url('/fonts/fontiran/woff/iranyekanbold.woff') format('woff'),
+         url('/fonts/fontiran/ttf/iranyekanbold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: 300;
+    src: url('/fonts/fontiran/eot/iranyekanlight.eot');
+    src: url('/fonts/fontiran/eot/iranyekanlight.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/fontiran/woff2/iranyekanlight.woff2') format('woff2'),
+         url('/fonts/fontiran/woff/iranyekanlight.woff') format('woff'),
+         url('/fonts/fontiran/ttf/iranyekanlight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: normal;
+    src: url('/fonts/fontiran/eot/iranyekanregular.eot');
+    src: url('/fonts/fontiran/eot/iranyekanregular.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/fontiran/woff2/iranyekanregular.woff2') format('woff2'),
+         url('/fonts/fontiran/woff/iranyekanregular.woff') format('woff'),
+         url('/fonts/fontiran/ttf/iranyekanregular.ttf') format('truetype');
+}

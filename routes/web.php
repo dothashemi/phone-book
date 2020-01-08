@@ -21,7 +21,9 @@ Route::prefix('panel')->middleware('auth')->group(function () {
 
     Route::resource('/contacts', 'ContactController');
 
-    Route::resource('/phones', 'ContactController');
+    Route::resource('/phones', 'PhoneController');
 
-    Route::resource('/groups', 'ContactController');
+    Route::resource('/groups', 'GroupController');
+
+    Route::get('/', 'ContactController@index');
 });

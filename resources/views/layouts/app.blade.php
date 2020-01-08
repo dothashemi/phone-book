@@ -9,6 +9,8 @@
     <meta name="generator" content="Jekyll v3.8.6">
     <title>دفترچه تلفن آنلاین</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="/css/fontawesome.css" rel="stylesheet">
+    <link href="/css/fontiran.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 

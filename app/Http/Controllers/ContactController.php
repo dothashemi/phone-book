@@ -19,53 +19,65 @@ class ContactController extends Controller
         return view('panel.contacts.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'group'     => 'nullable|exists:groups,id',
+            'firstName' => 'required|string|max:50',
+            'lastName'  => 'required|string|max:50',
+            'email'     => 'nullable|string|max:191',
+            'address'   => 'nullable|string|max:50',
+            'describe'  => 'nullable|string'
+        ]);
+
+        auth()->user()->contacts()->create([
+            'group_id'   => $request->group,
+            'first_name' => $request->firstName,
+            'last_name'  => $request->lastName,
+            'email'      => $request->email,
+            'address'    => $request->address,
+            'describe'   => $request->describe,
+        ]);
+
+        return redirect(route('contacts.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contact $contact)
-    {
-        //
-    }
 
     public function edit(Contact $contact)
     {
         return view('panel.contacts.edit', compact('contacts'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Contact $contact)
     {
-        //
+        $this->validate($request, [
+            'group'     => 'nullable|exists:groups,id',
+            'firstName' => 'required|string|max:50',
+            'lastName'  => 'required|string|max:50',
+            'email'     => 'nullable|string|max:191',
+            'address'   => 'nullable|string|max:50',
+            'describe'  => 'nullable|string'
+        ]);
+
+        $contact->update([
+            'group_id'   => $request->group,
+            'first_name' => $request->firstName,
+            'last_name'  => $request->lastName,
+            'email'      => $request->email,
+            'address'    => $request->address,
+            'describe'   => $request->describe,
+        ]);
+
+        return redirect(route('contacts.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+
+        return back();
     }
 }

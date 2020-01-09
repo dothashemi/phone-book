@@ -64,7 +64,7 @@
 
                     <li class="list-group-item lh-condensed">
                         <div>
-                            <a href="http://">
+                            <a href="{{ route('groups.create') }}">
                                 <h6 class="my-0">افزودن گروه</h6>
                             </a>
                             <small class="text-muted">افزودن گروه جدید</small>

@@ -4,9 +4,9 @@
 @section('content')
 
 <div class="d-flex align-items-center justify-content-between head-content-box">
-    <h5 class="m-0">افزودن مخاطب</h5>
+    <h5 class="m-0">ویرایش مخاطب</h5>
     <div>
-        <a href="{{ route('contacts.index') }}">
+        <a href="{{ route('contacts.show', ['id' => $contact->id]) }}">
             <button class="btn btn-warning btn-sm">بازگشت</button>
         </a>
     </div>

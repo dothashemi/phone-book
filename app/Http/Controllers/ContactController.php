@@ -7,10 +7,28 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = auth()->user()->contacts()->latest()->paginate(20);
-        return view('panel.contacts.list', compact('contacts'));
+        $this->validate($request, [
+            'group' => 'nullable|string|max:10'
+        ]);
+
+        $contacts = null;
+        $group_cat = null;
+
+        if ($request->group != null) {
+            $group = auth()->user()->groups()->find($request->group);
+            if ($group != null) {
+                $contacts = $group->contacts()->latest()->paginate(20);
+                $group_cat = $group->id;
+            } else
+                $contacts = auth()->user()->contacts()->latest()->paginate(20);
+        } else {
+            $contacts = auth()->user()->contacts()->latest()->paginate(20);
+        }
+
+
+        return view('panel.contacts.list', compact('contacts', 'group_cat'));
     }
 
     public function create()
@@ -96,7 +114,8 @@ class ContactController extends Controller
 
     public function destroy(Contact $contact)
     {
-        $contact->delete();
-        return back();
+        if (auth()->user()->contacts()->find($contact->id) != null)
+            $contact->delete();
+        return redirect(route('contacts.index'));
     }
 }

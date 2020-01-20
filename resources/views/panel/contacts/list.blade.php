@@ -17,7 +17,6 @@
     <h6 class="text-center">جست‌وجو</h6>
     <hr>
     <form action="{{ route('search.contacts') }}" method="GET" class="mt-3">
-        @csrf
         <div class="row">
             <div class="col-3">
                 <span class="text-muted">بر اساس نام: </span>
@@ -32,7 +31,6 @@
     </form>
 
     <form action="{{ route('search.phones') }}" method="GET" class="mt-3">
-        @csrf
         <div class="row">
             <div class="col-3">
                 <span class="text-muted">بر اساس شماره: </span>
@@ -46,6 +44,31 @@
         </div>
     </form>
 </div>
+
+
+
+<div class="my-3 bg-light p-3 rounded">
+    <form action="{{ route('contacts.index') }}" method="GET">
+        <div class="row">
+            <div class="col-3">
+                <span class="text-muted">فیلتر بر اساس گروه</span>
+            </div>
+            <div class="form-group col-7 m-0">
+                <select class="form-control form-control-sm" id="group" name="group">
+                  <option value="">همه‌ی گروه‌ها</option>
+                  @foreach(\App\Group::all() as $group)
+                    <option value="{{ $group->id }}" {{ $group_cat ? ($group_cat == $group->id ? 'selected' : '') : ''}}>{{ $group->name }}</option>
+                  @endforeach
+                </select>
+            </div>
+            <div class="col-2">
+            <button type="submit" class="btn btn-sm btn-block btn-warning text-center">فیلتر</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
 
 <table class="table table-striped">
     <thead class="thead-light">

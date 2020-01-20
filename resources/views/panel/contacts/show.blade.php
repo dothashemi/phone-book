@@ -34,16 +34,18 @@
     <strong>{{ $contact->describe ? $contact->describe : 'وارد نشده' }}</strong>
 </div>
 
-<div class="my-3">
-    <a href="{{ route('phones.create', ['contact' => $contact->id]) }}">
+<div class="my-3 d-flex">
+    <a class="ml-1" href="{{ route('phones.create', ['contact' => $contact->id]) }}">
         <button class="btn btn-success btn-sm">افزودن شماره تلفن</button>
     </a>
-    <a href="{{ route('contacts.edit', ['id' => $contact->id]) }}">
+    <a class="ml-1" href="{{ route('contacts.edit', ['id' => $contact->id]) }}">
         <button class="btn btn-primary btn-sm">ویرایش مخاطب</button>
     </a>
-    <a href="{{ route('contacts.destroy', ['id' => $contact->id]) }}">
+    <form class="ml-1" action="{{ route('contacts.destroy', ['id' => $contact->id]) }}" method="POST">
+        @method('DELETE')
+        @csrf
         <button class="btn btn-danger btn-sm">حذف مخاطب</button>
-    </a>
+    </form>
 </div>
 
 <hr>

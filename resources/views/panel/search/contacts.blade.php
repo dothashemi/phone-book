@@ -31,7 +31,7 @@
 
         <tr>
             <td class="pr-4"><a href="{{ route('contacts.show', ['id'=> $contact->id])}}" target="blank">{{ $contact->fullname() }}</a></td>
-            <td>
+            <td class="functions">
                 <a href="{{ route('contacts.show', ['id'=> $contact->id])}}" class="btn btn-sm btn-success text-white">
                     مشاهده
                 </a>

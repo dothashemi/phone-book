@@ -27,7 +27,7 @@ class PanelController extends Controller
 
         $contacts = auth()->user()->contacts()
             ->where('first_name', 'LIKE', $words)
-            ->where('last_name', 'LIKE', $words)
+            ->orWhere('last_name', 'LIKE', $words)
             ->paginate(20);
 
         $word = $request->word;

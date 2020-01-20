@@ -18,12 +18,12 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
         <header class="masthead mb-auto">
-            <div class="inner">
-                <h3 class="masthead-brand">Cover</h3>
-                <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Contact</a>
+            <div class="inner d-flex justify-content-between" dir="rtl">
+                <h4 class="masthead-brand">دفترچه تلفن آنلاین</h4>
+                <nav class="nav">
+                    <a class="nav-link text-muted" href="/">صفحه‌ی نخست</a>
+                    <a class="nav-link text-muted" href="/register">ثبت‌نام</a>
+                    <a class="nav-link text-muted" href="/login">ورود</a>
                 </nav>
             </div>
         </header>
@@ -32,8 +32,7 @@
 
         <footer class="mastfoot mt-auto">
             <div class="inner">
-                <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a
-                        href="https://twitter.com/mdo">@mdo</a>.</p>
+                <p>Phone Book App By Mohamed Hashemi</p>
             </div>
         </footer>
 

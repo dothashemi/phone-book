@@ -4,9 +4,9 @@
 @section('content')
 
 <div class="d-flex align-items-center justify-content-between head-content-box">
-    <h5 class="m-0">افزودن مخاطب</h5>
+    <h5 class="m-0">افزودن شماره تلفن</h5>
     <div>
-        <a href="{{ route('contacts.index') }}">
+        <a href="{{ route('contacts.show', ['id' => $contact->id]) }}">
             <button class="btn btn-warning btn-sm">بازگشت</button>
         </a>
     </div>
@@ -14,45 +14,38 @@
 
 <hr>
 
-<form class="needs-validation" novalidate method="POST" action="{{ route('contacts.store') }}">
+<form class="needs-validation" novalidate method="POST" action="{{ route('phones.store') }}">
     @csrf
 
+    <div class="my-3 mb-4 bg-light p-3 rounded">
+        <span class="text-muted">افزودن شماره تلفن به </span>
+        <strong>{{ $contact->fullname() }}</strong>
+    </div>
+
+    <input type="hidden" name="contact" value="{{ $contact->id }}">
+
     <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="firstName">نام</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+        <div class="col-md-6 form-group">
+            <label for="title">عنوان</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}"
+                required>
             <div class="invalid-feedback">
-                وارد کردن نام ضروری است.
+                وارد کردن عنوان ضروری است.
             </div>
         </div>
-        <div class="col-md-6 mb-3">
-            <label for="lastName">نام خانوادگی</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+        <div class="col-md-6 form-group">
+            <label for="number">شماره تلفن</label>
+            <input type="text" class="form-control text-left" id="number" name="number" value="{{ old('number') }}"
+                required>
             <div class="invalid-feedback">
-                وارد کردن نام خانوادگی ضروری است.
+                وارد کردن شماره تلفن ضروری است.
             </div>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="email">ایمیل<span class="text-muted"> اختیاری</span></label>
-        <input type="email" class="form-control text-left" id="email" placeholder="you@example.com">
-        <div class="invalid-feedback">
-            لطفا ایمیل معتبری وارد کنید.
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="address">آدرس</label>
-        <input type="text" class="form-control" id="address" placeholder="شهر، خیابان، پلاک، ..." required>
-        <div class="invalid-feedback">
-            لطفا آدرس را وارد کنید.
         </div>
     </div>
 
     <hr>
 
-    <button class="btn btn-primary btn-lg btn-block text-center" type="submit">افزودن</button>
+    <button class="btn btn-primary btn-block text-center" type="submit">افزودن</button>
 </form>
 
 @endsection

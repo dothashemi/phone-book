@@ -13,9 +13,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('panel')->middleware('auth')->group(function () {
 
@@ -26,4 +25,8 @@ Route::prefix('panel')->middleware('auth')->group(function () {
     Route::resource('/groups', 'GroupController');
 
     Route::get('/', 'ContactController@index');
+
+    Route::get('/search/contacts', 'PanelController@searchContact')->name('search.contacts');
+
+    Route::get('/search/phones', 'PanelController@searchPhone')->name('search.phones');
 });

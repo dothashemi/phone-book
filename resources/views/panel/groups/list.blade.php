@@ -3,12 +3,11 @@
 @section('content')
 
 <div class="d-flex align-items-center justify-content-between head-content-box">
-    <h5 class="m-0">مخاطبین</h5>
+    <h5 class="m-0">گروه‌ها</h5>
     <div>
-        <a href="{{ route('contacts.create') }}">
-            <button class="btn btn-primary btn-sm">افزودن مخاطب</button>
+        <a href="{{ route('groups.create') }}">
+            <button class="btn btn-primary btn-sm">افزودن گروه</button>
         </a>
-        <button class="btn btn-primary btn-sm">افزودن تلفن</button>
     </div>
 </div>
 
@@ -18,34 +17,25 @@
     <thead class="thead-light">
         <tr>
             <th class="pr-4">نام</th>
-            <th class="text-center">گروه</th>
-            <th class="text-center">تلفن</th>
             <th class="text-center">عملیات</th>
         </tr>
     </thead>
     <tbody>
 
-        @foreach ($contacts as $contact)
+        @foreach ($groups as $group)
 
         <tr>
-            <td class="pr-4"><a href="{{ $contact->path() }}" target="blank">{{ $contact->title }}</a></td>
-            <td class="text-center">{{ $contact->view_count }}</td>
-            <td class="text-center">{{ $contact->comment_count }}</td>
+            <td class="pr-4">{{ $group->name }}</td>
             <td>
-                <form action="{{ route('contacts.destroy' , ['id'=>$contact->id]) }}" method="POST" class="text-center">
+                <form action="{{ route('groups.destroy' , ['id'=>$group->id]) }}" method="POST" class="text-center functions">
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
-                    <div class="btn-group">
-                        <a href="{{ route('contacts.edit' , ['id'=>$contact->id]) }}" class="btn btn-primary">
-                            ویرایش
-                        </a>
-                        <button type="submit" class="btn btn-danger">
-                            حذف
-                        </button>
-                        <a href="{{ $contact->path() }}" class="btn btn-success" target="blank">
-                            مشاهده
-                        </a>
-                    </div>
+                    <a href="{{ route('groups.edit' , ['id'=>$group->id]) }}" class="btn btn-sm btn-primary text-white">
+                        ویرایش
+                    </a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        حذف
+                    </button>
                 </form>
             </td>
         </tr>
@@ -56,7 +46,7 @@
 </table>
 
 <div class="foot-content-box">
-    {!! $contacts->render() !!}
+    {!! $groups->render() !!}
 </div>
 
 @endsection

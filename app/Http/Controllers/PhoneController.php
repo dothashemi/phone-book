@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class PhoneController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('panel.phones.add');
+        $contact = auth()->user()->contacts()->find($request->contact);
+        if ($contact != null)
+            return view('panel.phones.add', compact('contact'));
+        return back();
     }
 
 
@@ -18,49 +21,66 @@ class PhoneController extends Controller
         $this->validate($request, [
             'contact' => 'required|exists:contacts,id',
             'title'   => 'required|string|max:30',
-            'phone'   => 'required|string|max:15'
+            'number'   => 'required|string|max:15'
         ]);
 
-        $contact = Contact::find($request->contact);
+        if (!is_numeric($request->number))
+            return back();
 
-        $contact->phones()->create([
-            'contact_id' => $request->contact,
-            'title'      => $request->title,
-            'phone'      => $request->phone,
-        ]);
+        $contact = auth()->user()->contacts()->find($request->contact);
 
-        return redirect(route('contacts.show')->compact($content));
+        if ($contact != null) {
+            $contact->phones()->create([
+                'contact_id' => $request->contact,
+                'title'      => $request->title,
+                'number'     => $request->number,
+            ]);
+            $id = $contact->id;
+            return redirect(route('contacts.show', compact('id')));
+        } else
+            return back();
     }
 
 
     public function edit(Phone $phone)
     {
-        return view('panel.phones.edit', compact('phone'));
+        $contact = auth()->user()->contacts()->find($phone->contact_id);
+        if ($contact != null)
+            return view('panel.phones.edit', compact('contact', 'phone'));
+        return back();
     }
 
 
     public function update(Request $request, Phone $phone)
     {
         $this->validate($request, [
+            'contact' => 'required|exists:contacts,id',
             'title'   => 'required|string|max:30',
-            'phone'   => 'required|string|max:15'
+            'number'   => 'required|string|max:15'
         ]);
 
-        $contact = Contact::find($request->contact);
+        if (!is_numeric($request->number))
+            return back();
 
-        $contact->phones()->create([
-            'title'      => $request->title,
-            'phone'      => $request->phone,
-        ]);
+        $contact = auth()->user()->contacts()->find($request->contact);
 
-        return redirect(route('contacts.show')->compact($content));
+        if ($contact != null && in_array($phone->id, $contact->phones()->pluck('id')->all())) {
+            $phone->update([
+                'title'      => $request->title,
+                'number'     => $request->number,
+            ]);
+            $id = $contact->id;
+            return redirect(route('contacts.show', compact('id')));
+        } else
+            return back();
     }
 
 
     public function destroy(Phone $phone)
     {
-        $phone->delete();
-
+        $contact = auth()->user()->contacts()->find($phone->contact_id);
+        if ($contact != null && in_array($phone->id, $contact->phones()->pluck('id')->all()))
+            $phone->delete();
         return back();
     }
 }

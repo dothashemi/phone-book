@@ -18,41 +18,62 @@
     @csrf
 
     <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="firstName">نام</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+        <div class="col-md-6 form-group">
+            <label for="first_name">نام</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}"
+                required>
             <div class="invalid-feedback">
                 وارد کردن نام ضروری است.
             </div>
         </div>
-        <div class="col-md-6 mb-3">
-            <label for="lastName">نام خانوادگی</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+        <div class="col-md-6 form-group">
+            <label for="last_name">نام خانوادگی</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}"
+                required>
             <div class="invalid-feedback">
                 وارد کردن نام خانوادگی ضروری است.
             </div>
         </div>
     </div>
 
-    <div class="mb-3">
-        <label for="email">ایمیل<span class="text-muted"> اختیاری</span></label>
-        <input type="email" class="form-control text-left" id="email" placeholder="you@example.com">
-        <div class="invalid-feedback">
-            لطفا ایمیل معتبری وارد کنید.
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label for="email">ایمیل<span class="text-muted"> اختیاری</span></label>
+                <input type="email" class="form-control text-left" id="email" name="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    لطفا ایمیل معتبری وارد کنید.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="group">گروه<span class="text-muted"> اختیاری</span></label>
+                <select class="form-control" id="group" name="group">
+                    <option value="">انتخاب نشده</option>
+                    @isset($groups)
+                        @foreach($groups as $group)
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                        @endforeach
+                    @endisset
+                </select>
+            </div>
         </div>
     </div>
 
-    <div class="mb-3">
-        <label for="address">آدرس</label>
-        <input type="text" class="form-control" id="address" placeholder="شهر، خیابان، پلاک، ..." required>
-        <div class="invalid-feedback">
-            لطفا آدرس را وارد کنید.
-        </div>
+    <div class="form-group">
+        <label for="address">آدرس<span class="text-muted"> اختیاری</span></label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="شهر، خیابان، پلاک، ...">
+    </div>
+
+    <div class="form-group">
+        <label for="describe">یادداشت<span class="text-muted"> اختیاری</span></label>
+        <textarea class="form-control" id="describe" name="describe"></textarea>
     </div>
 
     <hr>
 
-    <button class="btn btn-primary btn-lg btn-block text-center" type="submit">افزودن</button>
+    <button class="btn btn-primary btn-block text-center" type="submit">افزودن</button>
 </form>
 
 @endsection

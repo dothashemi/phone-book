@@ -9,7 +9,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::latest()->paginate(20);
+        $groups = auth()->user()->groups()->latest()->paginate(20);
 
         return view('panel.groups.list', compact('groups'));
     }
@@ -20,7 +20,7 @@ class GroupController extends Controller
         return view('panel.groups.add');
     }
 
-
+    
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -37,7 +37,9 @@ class GroupController extends Controller
 
     public function edit(Group $group)
     {
-        return view('panel.groups.edit', compact('group'));
+        if (auth()->user()->groups()->find($group->id) != null)
+            return view('panel.groups.edit', compact('group'));
+        return back();
     }
 
 
@@ -47,18 +49,22 @@ class GroupController extends Controller
             'name' => 'required|string|max:30'
         ]);
 
-        $group->update([
-            'name' => $request->name
-        ]);
+        if (auth()->user()->groups()->find($group->id) != null) {
 
-        return redirect(route('groups.index'));
+            $group->update([
+                'name' => $request->name
+            ]);
+
+            return redirect(route('groups.index'));
+        }
+        return back();
     }
 
 
     public function destroy(Group $group)
     {
-        $group->delete();
-
+        if (auth()->user()->groups()->find($group->id) != null)
+            $group->delete();
         return back();
     }
 }

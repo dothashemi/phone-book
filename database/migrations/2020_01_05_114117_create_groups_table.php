@@ -17,7 +17,6 @@ class CreateGroupsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name', 30)->unique();
-            $table->text('describe')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

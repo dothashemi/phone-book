@@ -22,8 +22,13 @@
                 <h4 class="masthead-brand">دفترچه تلفن آنلاین</h4>
                 <nav class="nav">
                     <a class="nav-link text-muted" href="/">صفحه‌ی نخست</a>
+                    @if(auth()->check())
+                    <a class="nav-link text-muted" href="/panel">پنل کاربری</a>
+                    <a class="nav-link text-muted" href="/logout">خروج</a>
+                    @else
                     <a class="nav-link text-muted" href="/register">ثبت‌نام</a>
                     <a class="nav-link text-muted" href="/login">ورود</a>
+                    @endif
                 </nav>
             </div>
         </header>

@@ -40,3 +40,24 @@
   thead{
     font-size: .9em;
   }
+
+  select {
+    padding: 0px 8px !important;
+  }
+
+  .btn-success:hover,
+  .btn-primary:hover {
+    color: white !important;
+  }
+
+  .functions .btn {
+    font-size: .8em;
+    padding: 1px 5px;
+  }
+
+
+  .list-group-item 
+  {
+    height: 100%;
+    padding: 20px;
+  }
